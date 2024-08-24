@@ -39,16 +39,30 @@ class DatabaseSeeder extends Seeder
         }
 
         for ($i = 0; $i < 20; $i++) {
+            $sender_id = $faker->numberBetween(1, 20);
+            $receiver_id = $faker->numberBetween(1, 20);
+
+            while ($sender_id === $receiver_id) {
+                $receiver_id = $faker->numberBetween(1, 20);
+            }
+
             DB::table('friend_requests')->insert([
-                'sender_id' => $faker->numberBetween(1, 20),
-                'receiver_id' => $faker->numberBetween(1, 20)
+                'sender_id' => $sender_id,
+                'receiver_id' => $receiver_id
             ]);
         }
 
         for ($i = 0; $i < 20; $i++) {
+            $user_id = $faker->numberBetween(1, 20);
+            $friend_id = $faker->numberBetween(1, 20);
+
+            while ($user_id === $friend_id) {
+                $friend_id = $faker->numberBetween(1, 20);
+            }
+
             DB::table('friends')->insert([
-                'user_id' => $faker->numberBetween(1, 20),
-                'friend_id' => $faker->numberBetween(1, 20)
+                'user_id' => $user_id,
+                'friend_id' => $friend_id
             ]);
         }
     }
